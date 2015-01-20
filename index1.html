@@ -1,0 +1,186 @@
+<!DOCTYPE HTML> 
+
+<html>
+	<header>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<meta charset="utf-8">
+	</header>
+	
+	<body>
+			<header>
+				<h1>D3 herkansings opdracht</h1>
+				<h3>Esther Bergé</h3>
+				<h3>2050027</h3>
+			</header>
+		<br>
+		<hr>
+		</br>
+		
+		
+		
+		<h2> Cijfers jaar 1 per periode </h2>
+		
+		<div class="chart"></div>
+		<button id="periode1">Periode 1</button>
+		<button id="periode2">Periode 2</button>
+		<button id="periode3">Periode 3</button>
+		<button id="periode4">Periode 4</button>
+	
+	
+	<script>
+
+		var data1 = [6, 7, 7, 6, 6, 7, 7, 7];
+		var data2 = [7, 6, 7, 8, 6, 6, 7, 7];
+		var data3 = [7, 7, 7, 6, 6, 6, 6, 6];
+		var data4 = [7, 6, 6, 6, 7, 6, 6, 6];
+	
+		var bars = d3.scale.linear()
+		.domain([0, d3.max(data1)])
+		.range([0,420]);
+		
+		d3.select(".chart")
+		.selectAll("div")
+		.data(data1)
+		.enter().append("div")
+		.style("width", function(d) { return bars(d) + "px"; })
+		.text(function(d) { return d});
+		
+		function showData(button, data) {
+			d3.select(button).on('click', function() {
+			d3.select('.chart').
+			selectAll('div')
+			.data(data).transition().style("width", function(d) { return bars(d) + "px";})
+			.duration(1000).text(function(d) { return d});
+			});
+		}
+		
+		showData('#periode1', data1);
+		showData('#periode2', data2);
+		showData('#periode3', data3);
+		showData('#periode4', data4);
+			
+	</script>
+
+	<hr>
+	
+	
+	
+		<h2>Animatie bal<h2>
+	
+		<svg id="bol" width="400" height="300">
+		<circle id = "rondje" fill="#FACC2E" cx="150" cy="50" r="30"/>
+		</svg>
+	
+	<script>
+
+		var circle = d3.select('#bol circle');
+		
+		var svg = d3.select('#rondje')
+					.on('click', function() {
+					circle.transition()
+					.duration(1600) 
+					.attr("cx",200)
+					.transition()
+					.duration(600)
+					.attr("cy", 250)
+					.transition()
+					.duration(600)
+					.attr("cx", 350)
+					.each("end",function() { d3.select(this).attr("fill", "red");  
+					})
+					})
+
+	</script>
+	
+	<hr>
+	
+	
+	
+	<h2> Top 3 film genres uit mijn collectie </h2>
+
+		<div class="chart1"></div>
+			<button id="genre1">Komedie</button>
+			<button id="genre2">Drama</button>
+			<button id="genre3">Actie</button>
+	
+	
+	<script>
+
+		var data1 = [85];
+		var data2 = [72];
+		var data3 = [67];
+
+		var bars = d3.scale.linear()
+		.domain([0, d3.max(data1)])
+		.range([0,420]);
+		
+		d3.select(".chart1")
+		.selectAll("div")
+		.data(data1)
+		.enter().append("div")
+		.style("width", function(d) { return bars(d) + "px"; })
+		.text(function(d) { return d});
+		
+
+		function showGenre(button, data) {
+			d3.select(button).on('click', function() {
+			d3.select('.chart1').
+			selectAll('div')
+			.data(data).transition().style("width", function(d) { return bars(d) + "px";})
+			.duration(1000).text(function(d) { return d});
+			});
+		}
+		
+		showGenre('#genre1', data1);
+		showGenre('#genre2', data2);
+		showGenre('#genre3', data3);
+			
+	</script>
+
+	<hr>
+	
+	
+	
+	<h2>Pie chart</h2>
+	
+	<p1>Komedie</p1> <br>
+	<p2>Drama</p2> <br>
+	<p3>Actie</p3> <br>
+	
+	<script>
+	
+		var data = [85, 72, 67];
+		var r = 100;
+		
+		var color = d3.scale.ordinal()
+			.range(["red", "orange", "yellow"]);
+		
+		var canvas = d3.select("body").append("svg")
+			.attr("width", 200)
+			.attr("height", 200);
+			
+		var group = canvas.append("g")
+			.attr("transform","translate (100, 100)");
+		
+		var arc = d3.svg.arc()
+			.innerRadius(0)
+			.outerRadius (r);
+			
+		var pie = d3.layout.pie()
+			.value(function (d) { return d; });
+			
+		var arcs = group.selectAll(".arc")
+			.data(pie(data))
+			.enter()
+			.append("g")
+			.attr("class", "arc");
+				
+		arcs.append("path")
+			.attr("d", arc)
+			.attr("fill", function (d) {return color(d.data); });
+		
+	</script>
+	
+	</body>
+</html>

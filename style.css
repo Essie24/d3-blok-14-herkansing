@@ -1,0 +1,53 @@
+html
+{
+  font-family: "Quicksand";
+  background-color: white;
+  text-align: left;
+  padding:30px;
+  margin: 5px;
+}
+
+p1 {
+	background-color: red;
+	}
+
+p2 {
+	background-color: orange;
+	}
+	
+p3 {
+	background-color: yellow;
+	}
+	
+.chart div {
+  fill: red;
+  background-color: red;
+  margin: 10px;
+  color: white;
+ }
+ 
+.chart text {
+  fill: white;
+  font: 12px Quicksand;
+}
+
+.chart1 div {
+  fill: blue;
+  background-color: blue;
+  margin: 10px;
+  color: white;
+ }
+ 
+.chart1 text {
+  fill: white;
+  font: 12px Quicksand;
+}
+
+button {
+	font-family: "Quicksand";
+    font-size: 1em;
+    padding: 5px;
+	width: 150px;
+}
+ 
+ 
